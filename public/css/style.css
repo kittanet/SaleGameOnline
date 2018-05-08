@@ -1,0 +1,77 @@
+body {
+    padding-top: 5rem;
+    background-image: url("/images/BBL.png");
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-attachment: fixed;
+  }
+  
+  .starter-template {
+    padding: 3rem 1.5rem;
+    text-align: center;
+  }
+  
+  .alert-error {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+  }
+  
+  .alert-success_msg {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+  }
+  
+  table.table-bordered {
+    border: 1px solid #ec1313;
+  }
+  
+  table.table-bordered > thead > tr > th {
+    border: 1px solid #ec1313;
+  }
+  
+  table.table-bordered > tbody > tr > td {
+    border: 1px solid #ec1313;
+  }
+  
+  .message {
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+    width: 45%;
+  }
+  
+  .message.info {
+    background-color: #2196F3;
+  }
+  
+  .message.warning {
+    background-color: #ff9800;
+  }
+   
+  .topnav .search-container {
+    float: right;
+  }
+  
+  .topnav input[type=text] {
+    padding: 6px;
+    margin-top: 8px;
+    font-size: 17px;
+    border: none;
+  }
+  
+  .topnav .search-container button {
+    float: right;
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-right: 16px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .topnav .search-container button:hover {
+    background: #ccc;
+  }

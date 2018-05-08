@@ -1,0 +1,28 @@
+extends layout
+block content
+    center
+        h2 Edit Game
+    form(method='POST', action='/api/game/'+game[0].name)
+        h3 Game Information
+        #form-group
+            label Game Name:
+            input.form-control(name='name', type='text' value=game[0].name)
+            label Price:
+            input.form-control(name='price', type='text' value=game[0].price)
+            label Rank:
+            input.form-control(name='rank', type='text' value=game[0].rank)
+            label Type:
+            input.form-control(name='type', type='text' value=game[0].type)
+            label Key:
+            input.form-control(name='key', type='text' value=game[0].key)
+            label Rate:
+            input.form-control(name='rate', type='text' value=game[0].rate)
+        br
+        h3 Picture Game
+        #form-group
+            label(for='file') Example file input
+            input#file.form-control-file(type='file', name='pic', value=game[0].pic)
+        br
+        center
+            input.btn.btn-primary(type='submit',value='Submit')
+            a.btn.btn-danger(href='/game/profile/'+game[0].name, role='button') Cancel

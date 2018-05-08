@@ -1,0 +1,39 @@
+extends layout
+block content
+    center
+        h2 Game Profile
+    br        
+    table.table.table-bordered
+        thead.thead(style='background-color: #ec1313; color: white;')
+            tr
+                th(scope='col') #
+                th(scope='col') Name
+                th(scope='col') Price
+                th(scope='col') Rank
+                th(scope='col') Type
+                th(scope='col') Key
+                th(scope='col') Rate
+                th(scope='col') Picture
+                th(scope='clo') Create Date
+                th(scope='clo') Last Update
+                th(scope='col') More Details
+
+        - for(var x=0;x<game.length;x++)
+            tr
+                td #{x+1}
+                td #{game[x].name}
+                td #{game[x].price}
+                td #{game[x].rank}
+                td #{game[x].type}
+                td #{game[x].rate}
+                td #{game[x].key}
+                td 
+                    img(src='/picture/'+game[x].pic, alt='' ,height="125" ,width="125")
+                td #{game[x].create_date}
+                if(game[x].create_date.getTime() == game[x].last_date.getTime())
+                    td No edit
+                else
+                    td #{game[x].last_date}
+                td
+                    center
+                        a.btn.btn-secondary(href='/game/profile/'+game[x].name) More

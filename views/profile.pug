@@ -1,0 +1,25 @@
+extends layout
+block content
+    center
+        h2 Game Profile
+    h3 Game Information
+    .row
+        .col Name: #{game[0].name}
+        .col Price: #{game[0].price}
+        .w-100
+        .col Rank: #{game[0].rank}
+        .col Type: #{game[0].type}
+        .w-100
+        .col Key: #{game[0].key}
+        .col Rate: #{game[0].rate}
+        .w-100
+        .col Picture:
+            br 
+            img(src='/picture/'+game[0].pic, alt='' ,height="125" ,width="125")
+        .col Create Date: #{game[0].create_date}       
+    br
+    center
+        a.btn.btn-primary(href='/game/edit/'+game[0].name) Edit
+        a.btn.btn-danger.delete-game(href='#',data-id=game[0].name) Delete
+
+        a.btn.btn-secondary(href='../list', role='button') Back

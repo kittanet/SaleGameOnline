@@ -1,0 +1,28 @@
+extends layout
+block content
+    center
+        h2 Add Game
+    form(method='POST', action='/api/game')
+        h3 Game Information
+        #form-group
+            label Game Name:
+            input.form-control(name='name', type='text')
+            label Price:
+            input.form-control(name='price', type='text')
+            label Rank:
+            input.form-control(name='rank', type='text')
+            label Type:
+            input.form-control(name='type', type='text')
+            label Key:
+            input.form-control(name='key', type='text')
+            label Rate:
+            input.form-control(name='rate', type='text')
+        br
+        h3 Picture Game
+        #form-group
+            label(for='file') file input
+            input#file.form-control-file(type='file' name='pic')
+        br
+        center
+            input.btn.btn-primary(type='submit',value='Submit')
+            a.btn.btn-danger(href='../', role='button') Cancel
