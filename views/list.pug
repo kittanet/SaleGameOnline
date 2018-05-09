@@ -17,14 +17,15 @@ block content
                 th(scope='clo') Create Date
                 th(scope='clo') Last Update
                 th(scope='col') More Details
-
         - for(var x=0;x<game.length;x++)
             tr
                 td #{x+1}
                 td #{game[x].name}
                 td #{game[x].price}
                 td #{game[x].rank}
-                td #{game[x].type}
+                - for(var y=0;y<type.length;y++)
+                    if(type[y].no == game[x].no_type)
+                        td #{type[y].name}
                 td #{game[x].rate}
                 td #{game[x].key}
                 td 

@@ -12,7 +12,9 @@ block content
             label Rank:
             input.form-control(name='rank', type='text' value=game[0].rank)
             label Type:
-            input.form-control(name='type', type='text' value=game[0].type)
+            select#Select1.form-control(name='no_type')
+                - for(var x=0;x<type.length;x++)
+                    option(value=type[x].no) #{type[x].name}
             label Key:
             input.form-control(name='key', type='text' value=game[0].key)
             label Rate:

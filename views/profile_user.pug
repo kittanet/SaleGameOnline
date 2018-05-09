@@ -1,4 +1,4 @@
-extends layout
+extends layout_user
 block content
     center
         h2 Game Profile
@@ -18,11 +18,8 @@ block content
         .w-100
         .col Picture:
             br 
-            img(src='/picture/'+game[0].pic, alt='' ,height="125" ,width="125")
-        .col Create Date: #{game[0].create_date}       
+            img(src='/picture/'+game[0].pic, alt='' ,height="125" ,width="125")    
     br
     center
-        a.btn.btn-primary(href='/game/edit/'+game[0].name) Edit
-        a.btn.btn-danger.delete-game(href='#',data-id=game[0].name) Delete
-
-        a.btn.btn-secondary(href='../list', role='button') Back
+        a.btn.btn-primary(href='/api/buy/'+game[0].name) Buy
+        a.btn.btn-secondary(href='../', role='button') Back

@@ -6,7 +6,7 @@ $(document).ready(function() {
             type: 'DELETE',
             url: '/api/game/' + id,
             success: function(response) {
-                alert('Reject Invoice');
+                alert('Delete Game');
                 window.location.href = '/game/list';
             },
             error: function(err) {

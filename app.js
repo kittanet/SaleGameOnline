@@ -15,14 +15,69 @@ app.set('view engine', 'pug')
 app.use(express.static('public'))
 
 Game = require('./models/game')
+Type = require('./models/type')
 User = require('./models/user')
 
 mongoose.connect('mongodb://localhost/SaleGameOnline')
 var db = mongoose.connection
 
 //router
-app.get('/', function(req, res) {
+app.get('/store', function(req, res) {
     Game.find({}, function(err, game) {
+        if (err) {
+            console.log(err)
+        } else {
+            Type.find({}, function(err, type){
+                if (err) {
+                    console.log(err)
+                } else {
+                    res.render('product', {
+                        game: game,
+                        type: type
+                    })
+                }
+            })
+        }
+    })
+})
+
+app.get('/game/add_type', function(req, res) {
+    res.render('add_type')
+})
+
+app.get('/game/add_game', function(req, res) {
+    Type.find({},function(err, type){
+        if (err){
+            console.log(err)
+        } else {
+            res.render('add_game',{
+                type : type
+            })
+        }
+    })
+})
+
+app.get('/game/list', function(req, res) {
+    Game.find({}, function(err, game) {
+        if (err) {
+            console.log(err)
+        } else {
+            Type.find({}, function(err, type){
+                if (err) {
+                    console.log(err)
+                } else {
+                    res.render('list', {
+                        game: game,
+                        type: type
+                    })
+                }
+            })
+        }
+    })
+})
+
+app.get('/game/list/FPS', function(req, res) {
+    Game.find({type:"FPS"}, function(err, game) {
         if (err) {
             console.log(err)
         } else {
@@ -33,16 +88,12 @@ app.get('/', function(req, res) {
     })
 })
 
-app.get('/game/add', function(req, res) {
-    res.render('add')
-})
-
-app.get('/game/list', function(req, res) {
-    Game.find({}, function(err, game) {
+app.get('/game/list/RPG', function(req, res) {
+    Game.find({type:"RPG"}, function(err, game) {
         if (err) {
             console.log(err)
         } else {
-            res.render('list', {
+            res.render('product', {
                 game: game,
             })
         }
@@ -50,34 +101,85 @@ app.get('/game/list', function(req, res) {
 })
 
 app.get('/game/profile/:_id', function(req, res) {
-    Game.find({
-        name: req.params._id
-    }, function(err, game) {
+    Game.find({name: req.params._id}, function(err, game) {
         if (err) {
             console.log(err)
         } else {
-            res.render('profile', {
-                game: game,
+            Type.find({},function(err, type){
+                if (err) {
+                    console.log(err)
+                } else {
+                    res.render('profile', {
+                        game: game,
+                        type: type
+                    })
+                }
+            })
+            
+        }
+    })
+})
+
+app.get('/store/profile/:_id', function(req, res) {
+    Game.find({name: req.params._id}, function(err, game) {
+        if (err) {
+            console.log(err)
+        } else {
+            Type.find({},function(err, type){
+                if (err) {
+                    console.log(err)
+                } else {
+                    res.render('profile_user', {
+                        game: game,
+                        type: type
+                    })
+                }
+            })
+            
+        }
+    })
+})
+
+app.get('/store/type/:_id', function(req, res) {
+    Game.find({no_type:req.params._id}, function(err, game) {
+        if (err) {
+            console.log(err)
+        } else {
+            Type.find({}, function(err, type){
+                if (err) {
+                    console.log(err)
+                } else {
+                    res.render('product', {
+                        game: game,
+                        type: type
+                    })
+                }
             })
         }
     })
 })
 
 app.get('/game/edit/:_id', function(req, res) {
-    Game.find({
-        name: req.params._id
-    }, function(err, game) {
+    Game.find({name: req.params._id}, function(err, game) {
         if (err) {
             console.log(err)
         } else {
-            res.render('edit', {
-                game: game,
+            Type.find({}, function(err, type){
+                if (err) {
+                    console.log(err)
+                } else {
+                    res.render('edit', {
+                        game: game,
+                        type: type
+                    })
+                }
             })
+            
         }
     })
 })
 
-app.get('/game/', function(req, res) {
+app.post('/game/', function(req, res) {
     console.log(req)
     Game.find({
         name: req.params._id
@@ -91,8 +193,19 @@ app.get('/game/', function(req, res) {
 })
 
 //api
+app.post('/api/type', function(req, res) {
+    var type = req.body
+    Type.addType(type, function(err, type) {
+        if (err) {
+            throw err
+        }
+        res.redirect('/game/list')
+    })
+})
+
 app.post('/api/game', function(req, res) {
     var game = req.body
+    console.log(game)
     Game.addGame(game, function(err, game) {
         if (err) {
             throw err
@@ -125,9 +238,21 @@ app.get('/api/game/find/:_id', function(req, res) {
     Game.findGame(req.params._id,function(err, game) {
         if (err) {
             throw err
-        }console.log(game)
+        }
         res.render('list', {
             game: game,
+        })
+    })
+})
+
+app.get('/api/buy/:_id', function(req, res) {
+    var id = req.params._id
+    Game.findOne({name:id},function(err, game){
+        var temp = game.key -1
+        Game.findOneAndUpdate({name:id}, {key:temp},function(err){
+            if (err) {
+                throw err
+            } res.redirect('/store')
         })
     })
 })

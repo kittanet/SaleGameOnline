@@ -1,0 +1,15 @@
+extends layout
+block content
+    center
+        h2 Add Type
+    form(method='POST', action='/api/type')
+        h3 Type Information
+        #form-group
+            label No type:
+            input.form-control(name='no', type='text')
+            label Name type:
+            input.form-control(name='name', type='text')
+        br
+        center
+            input.btn.btn-primary(type='submit',value='Submit')
+            a.btn.btn-danger(href='./list', role='button') Cancel

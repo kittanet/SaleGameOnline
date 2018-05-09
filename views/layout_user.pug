@@ -12,12 +12,9 @@ html(lang="eng")
                 span.navbar-toggler-icon
             #navbarsExampleDefault.collapse.navbar-collapse
                 ul.navbar-nav.mr-auto
-                    li.nav-item
-                        a.nav-link(href='/game/add_type') Add Type
-                    li.nav-item
-                        a.nav-link(href='/game/add_game') Add Game
-                    li.nav-item
-                        a.nav-link(href='/game/list') List Game
+                    - for(var x=0;x<type.length;x++)
+                        li.nav-item
+                            a.nav-link(href='/store/type/'+type[x].no) #{type[x].name}
                 ul.nav.navbar-nav.navbar-right
                     li.nav-item
                         .topnav
@@ -26,7 +23,7 @@ html(lang="eng")
                                     input(type='text', placeholder='Search..', name='search')
                                     button(type='submit') Submit
                     li.nav-item
-                        a.nav-link(href='#') Admin
+                        a.nav-link(href='#') User
         .container-fluid
             block content
             br

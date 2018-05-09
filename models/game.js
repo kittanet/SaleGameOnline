@@ -4,7 +4,8 @@ var mongoose = require('mongoose')
 var GameSchema = mongoose.Schema({
     name: {
         type: String,
-        require: true
+        require: true,
+        unique : true
     },
     price: {
         type: Number,
@@ -14,8 +15,8 @@ var GameSchema = mongoose.Schema({
         type: Number,
         require: true
     },
-    type: {
-        type: String,
+    no_type: {
+        type: Number,
         require: true
     },
     key: {
@@ -75,4 +76,9 @@ module.exports.getGameByName = function(name, callback, limit) {
 //find Game
 module.exports.findGame = function(id, callback) {
     Game.findOne({name:id}, callback)
+}
+
+//find GameByType
+module.exports.findGameByType = function(id, callback) {
+    Game.find({type:id}, callback)
 }
