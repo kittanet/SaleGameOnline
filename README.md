@@ -6,6 +6,11 @@ Sale Game Online is project use mongoDB run on NodeJS
 
 install MongoDB in your computer
 
+install project
+```sh
+$ git clone https://github.com/kittanet/SaleGameOnline.git
+```
+
 and install node
 ```sh
 $ npm install
